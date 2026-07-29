@@ -82,7 +82,3 @@ Build **US1**, plus **one** of US2a or US2b (your choice). Write up the one you 
 We care more about your thinking than about polish, and the frontend is the heart of this one. We are reading for how you design for the person using the screen, how you structure the frontend and the backend, how you keep the view current, how you handle the messy edges, and how easily someone else could pick up your work.
 
 If anything in this spec is unclear, or seems wrong, we would rather you ask or flag it than quietly build around it.
-
-We care more about your thinking than about polish, and the frontend is the heart of this one. We are reading for how you design for the person using the screen, how you structure the frontend and the backend, how you keep the view current, how you handle the messy edges, and how easily someone else could pick up your work.
-
-If anything in this spec is unclear, or seems wrong, we would rather you ask or flag it than quietly build around it.
