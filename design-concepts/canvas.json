@@ -1,0 +1,12 @@
+{
+  "artboards": [
+    { "file": "Main.dc.html", "x": 0, "y": 0, "w": 900, "h": 780 },
+    { "file": "Mobile.dc.html", "x": 1000, "y": 0, "w": 390, "h": 844 },
+    { "file": "States.dc.html", "x": 0, "y": 940, "w": 1280, "h": 480 }
+  ],
+  "annotations": [
+    { "id": "note-main", "x": 0, "y": -80, "w": 480, "text": "Desktop — status list, US1 + US2a only. No operator tools; maintenance is design notes only." },
+    { "id": "note-mobile", "x": 1000, "y": -80, "w": 390, "text": "Same layout at phone width — cards stack, confirmation becomes a bottom sheet." }
+  ],
+  "launch": { "view": "canvas" }
+}

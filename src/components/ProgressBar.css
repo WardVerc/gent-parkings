@@ -1,0 +1,32 @@
+.progress-bar {
+  height: 6px;
+  border-radius: 999px;
+  background: var(--color-status-closed-bg);
+  overflow: hidden;
+  margin-top: var(--space-3);
+}
+
+.progress-bar__fill {
+  height: 100%;
+  border-radius: 999px;
+}
+
+.progress-bar__fill--open {
+  background: var(--color-status-open);
+}
+
+.progress-bar__fill--filling-up {
+  background: var(--color-status-filling-icon);
+}
+
+.progress-bar__fill--full {
+  background: var(--color-status-full);
+}
+
+.progress-bar__fill--closed {
+  background: var(--color-status-closed);
+}
+
+.progress-bar__fill--stale {
+  background: var(--color-status-stale);
+}

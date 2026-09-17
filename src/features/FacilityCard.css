@@ -1,0 +1,45 @@
+.facility-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-4);
+  margin-bottom: var(--space-3);
+}
+
+.facility-card__top {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.facility-card__facility {
+  margin-right: auto;
+}
+
+.facility-card__name {
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.facility-card__meta {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+  margin-top: 2px;
+}
+
+.facility-card__meta--warn {
+  color: var(--color-status-filling);
+  font-weight: 600;
+}
+
+.facility-card__bottom {
+  display: flex;
+  justify-content: end;
+  margin-top: var(--space-3);
+}
+
+.facility-card__warning {
+  font-size: var(--font-size-sm);
+  color: var(--color-status-full);
+  font-weight: 600;
+}

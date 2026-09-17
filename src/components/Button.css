@@ -1,0 +1,33 @@
+.btn {
+  width: fit-content;
+  padding: var(--space-4) var(--space-5);
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font: inherit;
+  font-weight: 600;
+  font-size: var(--font-size-base);
+}
+
+.btn:disabled {
+  cursor: not-allowed;
+}
+
+.btn--primary {
+  background: var(--color-accent);
+  color: var(--color-accent-contrast);
+}
+
+.btn--primary:hover:not(:disabled) {
+  background: var(--color-accent-hover);
+}
+
+.btn--primary:disabled {
+  background: var(--color-status-closed-bg);
+  color: var(--color-text-muted);
+}
+
+.btn--secondary {
+  background: var(--color-status-closed-bg);
+  color: var(--color-text);
+}

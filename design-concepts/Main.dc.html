@@ -1,0 +1,196 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; }
+  a { color: #1D5FA3; } a:hover { color: #164a80; }
+  .frame {
+    width: 900px; height: 780px; background: #F5F6F8;
+    font-family: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    color: #1B2430; position: relative; overflow: hidden;
+  }
+  .num { font-family: "IBM Plex Mono", monospace; font-weight: 500; }
+  header.top {
+    height: 72px; display: flex; align-items: center; justify-content: space-between;
+    padding: 0 32px; background: #FFFFFF; border-bottom: 1px solid #E2E5EA;
+  }
+  .brand { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 19px; }
+  .brand svg { color: #1D5FA3; }
+  .live-pill {
+    display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 500;
+    color: #1E7F4B; background: #E4F5EA; padding: 7px 14px; border-radius: 999px;
+  }
+  .live-dot { width: 8px; height: 8px; border-radius: 50%; background: #1E7F4B; }
+
+  .body { padding: 26px 32px; max-width: 640px; margin: 0 auto; }
+  .body h1 { font-size: 21px; margin: 0 0 4px; font-weight: 700; }
+  .body .sub { font-size: 14px; color: #5B6472; margin: 0 0 18px; }
+
+  .card {
+    display: flex; align-items: center; gap: 16px; background: #FFFFFF; border: 1px solid #E2E5EA;
+    border-radius: 12px; padding: 14px 18px; margin-bottom: 12px; min-height: 88px;
+  }
+  .chip {
+    width: 52px; height: 52px; border-radius: 10px; display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .chip svg { width: 26px; height: 26px; }
+  .who { width: 170px; flex-shrink: 0; }
+  .who .name { font-weight: 600; font-size: 16px; }
+  .who .meta { font-size: 12.5px; color: #5B6472; margin-top: 2px; }
+  .nums { width: 140px; flex-shrink: 0; }
+  .nums .big { font-size: 24px; font-weight: 600; line-height: 1; }
+  .nums .of { font-size: 13px; color: #5B6472; }
+  .bar { height: 6px; border-radius: 999px; background: #ECEDF0; margin-top: 8px; overflow: hidden; }
+  .bar > div { height: 100%; border-radius: 999px; }
+  .status-label { flex: 1; font-size: 13.5px; font-weight: 600; display: flex; align-items: center; gap: 6px; }
+  .action { width: 170px; flex-shrink: 0; display: flex; flex-direction: column; align-items: flex-end; gap: 4px; }
+  .btn {
+    font: inherit; font-weight: 600; font-size: 14.5px; border-radius: 8px; padding: 0 20px; height: 44px;
+    border: none; cursor: default; display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+  }
+  .btn-primary { background: #1D5FA3; color: #fff; }
+  .btn-disabled { background: #ECEDF0; color: #9AA1AB; }
+  .reason { font-size: 11.5px; color: #5B6472; text-align: right; max-width: 170px; }
+  .held-tag {
+    display: inline-flex; align-items: center; gap: 6px; background: #E4F5EA; color: #1E7F4B;
+    font-weight: 600; font-size: 13px; padding: 10px 14px; border-radius: 8px; height: 44px;
+  }
+
+  .green { color: #1E7F4B; background: #E4F5EA; }
+  .amber { color: #9A6400; background: #FDF0DA; }
+  .red { color: #B3261E; background: #FBE9E7; }
+  .gray { color: #5B6472; background: #ECEDF0; }
+  .stale-chip { color: #6B6558; background: repeating-linear-gradient(45deg, #ECEDF0 0 8px, #F3F1E9 8px 16px); }
+
+  .scrim {
+    position: absolute; inset: 0; background: rgba(20,24,31,0.42); display: flex; align-items: center; justify-content: center;
+  }
+  .modal { width: 400px; background: #FFFFFF; border-radius: 14px; padding: 24px; box-shadow: 0 20px 60px rgba(0,0,0,0.25); }
+  .modal h2 { font-size: 18px; margin: 0 0 10px; }
+  .modal p { font-size: 14px; color: #3A4250; line-height: 1.55; margin: 0 0 16px; }
+  .field-label { font-size: 12px; font-weight: 600; color: #5B6472; margin-bottom: 6px; }
+  .name-input { width: 100%; height: 44px; border: 1px solid #E2E5EA; border-radius: 8px; padding: 0 12px; font: inherit; font-size: 14.5px; margin-bottom: 8px; color: #9AA1AB; }
+  .hint { font-size: 11.5px; color: #9AA1AB; margin: 0 0 20px; }
+  .modal-actions { display: flex; justify-content: flex-end; gap: 10px; }
+  .btn-secondary { background: #ECEDF0; color: #1B2430; }
+</style>
+</helmet>
+
+<div class="frame">
+  <header class="top">
+    <div class="brand">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="22" height="22">
+        <rect x="4" y="9" width="16" height="9" rx="2"/><path d="M6 9V7a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v2"/><circle cx="8.5" cy="18" r="1.4"/><circle cx="15.5" cy="18" r="1.4"/>
+      </svg>
+      Gent Parkeren
+    </div>
+    <div class="live-pill"><span class="live-dot"></span>Live &middot; updated 12s ago</div>
+  </header>
+
+  <div class="body">
+    <h1>Parking facilities</h1>
+    <p class="sub">5 facilities in Ghent &middot; reserve a spot before you arrive</p>
+
+    <div class="card">
+      <div class="chip green">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8 12l3 3 5-6"/></svg>
+      </div>
+      <div class="who"><div class="name">Reep</div><div class="meta">updated 9s ago</div></div>
+      <div class="nums"><span class="big num">168</span> <span class="of">/ 250 free</span><div class="bar"><div style="width:67%; background:#1E7F4B;"></div></div></div>
+      <div class="status-label" style="color:#1E7F4B;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8 12l3 3 5-6"/></svg>
+        Open &middot; plenty of space
+      </div>
+      <div class="action"><span class="held-tag">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8 12l3 3 5-6"/></svg>
+        Reserved for Ward</span></div>
+    </div>
+
+    <div class="card">
+      <div class="chip amber">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5 21 19H3z"/><path d="M12 9.5v4"/><circle cx="12" cy="16.3" r="0.9" fill="currentColor" stroke="none"/></svg>
+      </div>
+      <div class="who"><div class="name">Ramen</div><div class="meta">updated 12s ago</div></div>
+      <div class="nums"><span class="big num">14</span> <span class="of">/ 300 free</span><div class="bar"><div style="width:5%; background:#C17E06;"></div></div></div>
+      <div class="status-label" style="color:#9A6400;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5 21 19H3z"/><path d="M12 9.5v4"/><circle cx="12" cy="16.3" r="0.9" fill="currentColor" stroke="none"/></svg>
+        Open &middot; filling up
+      </div>
+      <div class="action"><button class="btn btn-primary">Reserve</button></div>
+    </div>
+
+    <div class="card">
+      <div class="chip red">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9 9l6 6M15 9l-6 6"/></svg>
+      </div>
+      <div class="who"><div class="name">Vrijdagmarkt</div><div class="meta">updated 15s ago</div></div>
+      <div class="nums"><span class="big num">0</span> <span class="of">/ 150 free</span><div class="bar"><div style="width:0%; background:#B3261E;"></div></div></div>
+      <div class="status-label" style="color:#B3261E;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9 9l6 6M15 9l-6 6"/></svg>
+        Full
+      </div>
+      <div class="action">
+        <button class="btn btn-disabled">Reserve</button>
+        <span class="reason">No free spaces right now</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="chip gray">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M6 6l12 12"/></svg>
+      </div>
+      <div class="who"><div class="name">Getouw</div><div class="meta">updated 9s ago</div></div>
+      <div class="nums"><span class="big num">&mdash;</span> <span class="of">/ 500 spaces</span><div class="bar"><div style="width:0%; background:#5B6472;"></div></div></div>
+      <div class="status-label" style="color:#5B6472;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M6 6l12 12"/></svg>
+        Closed
+      </div>
+      <div class="action">
+        <button class="btn btn-disabled">Reserve</button>
+        <span class="reason">Facility is closed</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="chip stale-chip">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#6B6558" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+      </div>
+      <div class="who"><div class="name">Savaanstraat</div><div class="meta" style="color:#9A6400; font-weight:600;">Updated 8 min ago</div></div>
+      <div class="nums"><span class="big num">45</span> <span class="of">/ 200 free</span><div class="bar"><div style="width:22%; background:#B7AF95;"></div></div></div>
+      <div class="status-label" style="color:#6B6558;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+        Data delayed &middot; last known count
+      </div>
+      <div class="action">
+        <button class="btn btn-disabled">Reserve</button>
+        <span class="reason">Confirm on arrival &mdash; feed is delayed</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="scrim">
+    <div class="modal">
+      <h2>Reserve a spot at Ramen?</h2>
+      <p>14 spaces free of 300 right now. We&rsquo;ll hold 1 spot for 30 minutes after your planned arrival time.</p>
+      <div class="field-label">Your name</div>
+      <div class="name-input">e.g. Ward</div>
+      <p class="hint">We&rsquo;ll remember this on this device for next time.</p>
+      <div class="modal-actions">
+        <button class="btn btn-secondary">Cancel</button>
+        <button class="btn btn-primary">Confirm reservation</button>
+      </div>
+    </div>
+  </div>
+</div>
+</x-dc>
+</body>
+</html>

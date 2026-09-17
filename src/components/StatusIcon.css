@@ -1,0 +1,19 @@
+.status-icon--open {
+  color: var(--color-status-open);
+}
+
+.status-icon--filling-up {
+  color: var(--color-status-filling-icon);
+}
+
+.status-icon--full {
+  color: var(--color-status-full);
+}
+
+.status-icon--closed {
+  color: var(--color-status-closed);
+}
+
+.status-icon--stale {
+  color: var(--color-status-stale);
+}

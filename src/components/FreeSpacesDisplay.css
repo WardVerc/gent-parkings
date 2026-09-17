@@ -1,0 +1,10 @@
+.free-spaces__count {
+  font-size: var(--font-size-2xl);
+  font-weight: 600;
+  font-family: var(--font-family-mono);
+}
+
+.free-spaces__of {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+}

@@ -1,0 +1,28 @@
+.status-chip {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-md);
+  width: 44px;
+  height: 44px;
+}
+
+.status-chip--open {
+  background: var(--color-status-open-bg);
+}
+
+.status-chip--filling-up {
+  background: var(--color-status-filling-bg);
+}
+
+.status-chip--full {
+  background: var(--color-status-full-bg);
+}
+
+.status-chip--closed {
+  background: var(--color-status-closed-bg);
+}
+
+.status-chip--stale {
+  background: var(--color-status-stale-bg);
+}

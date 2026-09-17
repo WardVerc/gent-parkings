@@ -1,0 +1,27 @@
+.facility-list__skeleton-row {
+  height: 88px;
+  border-radius: var(--radius-md);
+  background: linear-gradient(90deg, var(--color-border) 0%, var(--color-bg) 50%, var(--color-border) 100%);
+  margin-bottom: var(--space-3);
+}
+
+.facility-list__message {
+  text-align: center;
+  padding: var(--space-6) 0;
+  color: var(--color-text-secondary);
+}
+
+.facility-list__message-sub {
+  font-size: var(--font-size-sm);
+  margin-top: var(--space-2);
+}
+
+.facility-list__banner {
+  background: var(--color-status-stale-bg);
+  color: var(--color-status-stale);
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-sm);
+  margin-bottom: var(--space-4);
+}
