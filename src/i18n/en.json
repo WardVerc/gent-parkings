@@ -2,6 +2,9 @@
   "app.heading": "Parking facilities",
   "app.subtitle": "Reserve a spot before you arrive",
 
+  "sort.name": "Name",
+  "sort.freeSpaces": "Free spots",
+
   "list.errorTitle": "Can't reach live parking data right now.",
   "list.errorSubtitle": "We'll keep trying automatically every 25 seconds.",
   "list.empty": "No facilities to show right now.",

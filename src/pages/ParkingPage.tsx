@@ -3,11 +3,28 @@ import "./ParkingPage.css";
 import { useParkingFacilities } from "../hooks/useParkingFacilities";
 import { useReservations } from "../hooks/useReservations";
 import { FacilityList } from "../features/FacilityList";
+import { SortControls } from "../features/SortControls";
 import { ReservationModal } from "../features/ReservationModal";
 import { FacilityDetailModal } from "../features/FacilityDetailModal";
-import { toFacilityView } from "../data/facility";
+import { toFacilityView, type FacilityView } from "../data/facility";
+import { useSort, type SortOption } from "../hooks/useSort";
 import { useTranslation } from "../i18n/useTranslation";
 import { Modal } from "../components/Modal";
+
+const FACILITY_SORT_OPTIONS: SortOption<FacilityView>[] = [
+  {
+    id: "name",
+    labelKey: "sort.name",
+    defaultDirection: "asc",
+    compare: (a, b) => a.name.localeCompare(b.name),
+  },
+  {
+    id: "freeSpaces",
+    labelKey: "sort.freeSpaces",
+    defaultDirection: "desc",
+    compare: (a, b) => a.effectiveFreeSpaces - b.effectiveFreeSpaces,
+  },
+];
 
 export function ParkingPage() {
   const t = useTranslation();
@@ -28,18 +45,23 @@ export function ParkingPage() {
   const [viewingFacilityId, setViewingFacilityId] = useState<string | null>(
     null,
   );
+  const { sortId, direction, setSort, apply } = useSort(FACILITY_SORT_OPTIONS);
 
   const facilities =
     data?.map((facility) =>
       toFacilityView(facility, countAtFacility(facility.id)),
     ) ?? null;
+  const sortedFacilities = facilities ? apply(facilities) : null;
 
   const reservingFacility =
-    facilities?.find((facility) => facility.id === reservingFacilityId) ?? null;
+    sortedFacilities?.find((facility) => facility.id === reservingFacilityId) ??
+    null;
   const cancelingFacility =
-    facilities?.find((facility) => facility.id === cancelingFacilityId) ?? null;
+    sortedFacilities?.find((facility) => facility.id === cancelingFacilityId) ??
+    null;
   const viewingFacility =
-    facilities?.find((facility) => facility.id === viewingFacilityId) ?? null;
+    sortedFacilities?.find((facility) => facility.id === viewingFacilityId) ??
+    null;
 
   const handleConfirm = (driverName: string) => {
     if (!reservingFacility) return;
@@ -64,8 +86,17 @@ export function ParkingPage() {
         <h1>{t("app.heading")}</h1>
         <p className="parking-page__sub">{t("app.subtitle")}</p>
 
+        {sortedFacilities && sortedFacilities.length > 0 && (
+          <SortControls
+            options={FACILITY_SORT_OPTIONS}
+            activeSortId={sortId}
+            direction={direction}
+            onChange={setSort}
+          />
+        )}
+
         <FacilityList
-          facilities={facilities}
+          facilities={sortedFacilities}
           loading={loading}
           error={error}
           isStale={isStale}

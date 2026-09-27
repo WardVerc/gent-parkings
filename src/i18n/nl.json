@@ -2,6 +2,9 @@
   "app.heading": "Parkeergarages",
   "app.subtitle": "Reserveer een plek voor je aankomt",
 
+  "sort.name": "Naam",
+  "sort.freeSpaces": "Vrije plekken",
+
   "list.errorTitle": "Kan momenteel geen live parkeergegevens ophalen.",
   "list.errorSubtitle": "We proberen het automatisch elke 25 seconden opnieuw.",
   "list.empty": "Er zijn nu geen parkeergarages om te tonen.",
