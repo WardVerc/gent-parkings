@@ -60,7 +60,7 @@ export function FacilityList({
     <div>
       {isStale && asOf && (
         <div className="facility-list__banner">
-          {t("list.staleBanner", { time: formatTimestamp(asOf) })}
+          {t("list.staleBanner", { time: formatTimestamp(asOf, t) })}
         </div>
       )}
       {facilities &&
