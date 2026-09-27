@@ -4,14 +4,17 @@ import { FreeSpacesDisplay } from "../components/FreeSpacesDisplay";
 import { ProgressBar } from "../components/ProgressBar";
 import { ReserveAction } from "../components/ReserveAction";
 import type { StatusVariant } from "../components/StatusIcon";
-import { formatRelativeAge } from "../data/staleness";
+import { getRelativeAgeSeconds } from "../data/staleness";
 import type { FacilityView } from "../data/facility";
+import { useTranslation } from "../i18n/useTranslation";
 
 interface FacilityCardProps {
   facility: FacilityView;
   heldForName: string | null;
   isFeedStale: boolean;
   onReserve: (facility: FacilityView) => void;
+  onCancelReservation: (facility: FacilityView) => void;
+  onViewDetails: (facility: FacilityView) => void;
 }
 
 export function FacilityCard({
@@ -19,13 +22,22 @@ export function FacilityCard({
   heldForName,
   isFeedStale,
   onReserve,
+  onCancelReservation,
+  onViewDetails,
 }: FacilityCardProps) {
+  const t = useTranslation();
   const variant: StatusVariant = facility.isDataStale
     ? "stale"
     : facility.status;
 
+  const ageSeconds = getRelativeAgeSeconds(facility.lastUpdate);
+  const ageText =
+    ageSeconds < 60
+      ? t("time.secondsAgo", { count: ageSeconds })
+      : t("time.minutesAgo", { count: Math.round(ageSeconds / 60) });
+
   return (
-    <div className="facility-card">
+    <div className="facility-card" onClick={() => onViewDetails(facility)}>
       <div className="facility-card__top">
         <StatusChip variant={variant} />
         <div className="facility-card__facility">
@@ -37,7 +49,7 @@ export function FacilityCard({
                 : "facility-card__meta"
             }
           >
-            Updated {formatRelativeAge(facility.lastUpdate)}
+            {t("card.updated", { age: ageText })}
           </div>
         </div>
         <FreeSpacesDisplay
@@ -61,6 +73,7 @@ export function FacilityCard({
           heldForName={heldForName}
           isFeedStale={isFeedStale}
           onReserve={() => onReserve(facility)}
+          onCancelReservation={() => onCancelReservation(facility)}
         />
       </div>
     </div>

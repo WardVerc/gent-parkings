@@ -1,13 +1,32 @@
 import { isStale } from "./staleness";
 import { deriveStatus } from "./status";
+import { STALE_THRESHOLD_MS } from "../hooks/useParkingFacilities";
+
+export interface FacilityLocation {
+  lat: number;
+  lon: number;
+}
 
 export interface Facility {
   id: string;
   name: string;
+  description: string | null;
   totalCapacity: number;
   availableCapacity: number;
+  occupancyPercent: number | null;
   isOpenNow: boolean;
   lastUpdate: string;
+  facilityType: string | null;
+  openingTimesDescription: string | null;
+  operatorInformation: string | null;
+  isFreeParking: boolean;
+  infoUrl: string | null;
+  occupancyTrend: string | null;
+  category: string | null;
+  address: string | null;
+  phone: string | null;
+  location: FacilityLocation | null;
+  notes: string | null;
 }
 
 export type FacilityStatus = "open" | "filling-up" | "full" | "closed";
@@ -20,10 +39,6 @@ export interface FacilityView extends Facility {
   isDataStale: boolean;
   status: FacilityStatus;
 }
-
-// The feed updates in batches and isn't perfectly regular in practice (observed lag up to
-// ~4 minutes between batches even when healthy) — 5 minutes avoids flagging normal lag as stale.
-const STALE_THRESHOLD_MS = 5 * 60 * 1000;
 
 export function toFacilityView(
   facility: Facility,

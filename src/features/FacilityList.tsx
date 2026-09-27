@@ -1,6 +1,8 @@
 import "./FacilityList.css";
 import { FacilityCard } from "./FacilityCard";
+import { formatTimestamp } from "../data/staleness";
 import type { FacilityView } from "../data/facility";
+import { useTranslation } from "../i18n/useTranslation";
 
 interface FacilityListProps {
   facilities: FacilityView[] | null;
@@ -8,8 +10,10 @@ interface FacilityListProps {
   error: string | null;
   isStale: boolean;
   asOf: string | null;
-  reservedNameByFacility: Record<string, string | null>;
+  reservedNameByFacility: Record<string, string>;
   onReserve: (facility: FacilityView) => void;
+  onCancelReservation: (facility: FacilityView) => void;
+  onViewDetails: (facility: FacilityView) => void;
 }
 
 export function FacilityList({
@@ -20,7 +24,11 @@ export function FacilityList({
   asOf,
   reservedNameByFacility,
   onReserve,
+  onCancelReservation,
+  onViewDetails,
 }: FacilityListProps) {
+  const t = useTranslation();
+
   if (loading && !facilities) {
     return (
       <div>
@@ -34,10 +42,8 @@ export function FacilityList({
   if (error && !facilities) {
     return (
       <div className="facility-list__message">
-        <p>Can't reach live parking data right now.</p>
-        <p className="facility-list__message-sub">
-          We'll keep trying automatically every 25 seconds.
-        </p>
+        <p>{t("list.errorTitle")}</p>
+        <p className="facility-list__message-sub">{t("list.errorSubtitle")}</p>
       </div>
     );
   }
@@ -45,34 +51,30 @@ export function FacilityList({
   if (facilities && facilities.length === 0) {
     return (
       <div className="facility-list__message">
-        <p>No facilities to show right now.</p>
+        <p>{t("list.empty")}</p>
       </div>
     );
   }
-
-  const formatTime = (iso: string): string => {
-    return new Date(iso).toLocaleTimeString([], {
-      hour: "2-digit",
-      minute: "2-digit",
-    });
-  };
 
   return (
     <div>
       {isStale && asOf && (
         <div className="facility-list__banner">
-          Live feed unavailable — showing data as of {formatTime(asOf)}.
+          {t("list.staleBanner", { time: formatTimestamp(asOf) })}
         </div>
       )}
-      {facilities?.map((facility) => (
-        <FacilityCard
-          key={facility.id}
-          facility={facility}
-          heldForName={reservedNameByFacility[facility.id] ?? null}
-          isFeedStale={isStale}
-          onReserve={onReserve}
-        />
-      ))}
+      {facilities &&
+        facilities.map((facility) => (
+          <FacilityCard
+            key={facility.id}
+            facility={facility}
+            heldForName={reservedNameByFacility[facility.id] ?? null}
+            isFeedStale={isStale}
+            onReserve={onReserve}
+            onCancelReservation={onCancelReservation}
+            onViewDetails={onViewDetails}
+          />
+        ))}
     </div>
   );
 }

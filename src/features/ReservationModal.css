@@ -1,0 +1,5 @@
+.reservation-modal__hint {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+  padding: var(--space-2) var(--space-1);
+}

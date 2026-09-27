@@ -2,12 +2,14 @@ import "./ReserveAction.css";
 import { Button } from "./Button";
 import { Tag } from "./Tag";
 import type { FacilityView } from "../data/facility";
+import { useTranslation } from "../i18n/useTranslation";
 
 interface ReserveActionProps {
   facility: FacilityView;
   heldForName: string | null;
   isFeedStale: boolean;
   onReserve: () => void;
+  onCancelReservation: () => void;
 }
 
 export function ReserveAction({
@@ -15,19 +17,31 @@ export function ReserveAction({
   heldForName,
   isFeedStale,
   onReserve,
+  onCancelReservation,
 }: ReserveActionProps) {
+  const t = useTranslation();
+
   if (heldForName) {
-    return <Tag>Reserved for {heldForName}</Tag>;
+    return (
+      <Tag
+        onClick={(event) => {
+          event.stopPropagation();
+          onCancelReservation();
+        }}
+        showCloseIcon
+      >
+        {t("reserveAction.reservedFor", { name: heldForName })}
+      </Tag>
+    );
   }
 
   const getDisabledReason = (
     facility: FacilityView,
     isFeedStale: boolean,
   ): string | null => {
-    if (isFeedStale)
-      return "Reserving is currently unavailable. Try again in a couple of minutes.";
-    if (facility.status === "closed") return "Facility is closed.";
-    if (facility.status === "full") return "No free spaces right now.";
+    if (isFeedStale) return t("reserveAction.reason.feedStale");
+    if (facility.status === "closed") return t("reserveAction.reason.closed");
+    if (facility.status === "full") return t("reserveAction.reason.full");
     return null;
   };
 
@@ -36,7 +50,7 @@ export function ReserveAction({
     return (
       <div className="reserve-action">
         <Button variant="primary" disabled>
-          Reserve
+          {t("reserveAction.button")}
         </Button>
         <span className="reserve-action__reason">{reason}</span>
       </div>
@@ -44,8 +58,14 @@ export function ReserveAction({
   }
 
   return (
-    <Button variant="primary" onClick={onReserve}>
-      Reserve
+    <Button
+      variant="primary"
+      onClick={(event) => {
+        event.stopPropagation();
+        onReserve();
+      }}
+    >
+      {t("reserveAction.button")}
     </Button>
   );
 }

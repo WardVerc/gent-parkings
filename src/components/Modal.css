@@ -1,4 +1,4 @@
-.reservation-dialog__scrim {
+.modal__scrim {
   position: fixed;
   display: flex;
   justify-content: center;
@@ -9,7 +9,7 @@
   z-index: 10;
 }
 
-.reservation-dialog {
+.modal {
   width: 100%;
   max-width: 640px;
   background: var(--color-surface);
@@ -18,12 +18,18 @@
   box-shadow: var(--shadow-modal);
 }
 
-.reservation-dialog h2 {
+.modal h2 {
   font-size: var(--font-size-lg);
   margin: 0 0 var(--space-3);
 }
 
-.reservation-dialog__description {
+.modal__header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.modal__description {
   font-size: var(--font-size-sm);
   color: var(--color-text);
   line-height: 1.55;
@@ -31,13 +37,7 @@
   margin-bottom: var(--space-4);
 }
 
-.reservation-dialog__hint {
-  font-size: var(--font-size-sm);
-  color: var(--color-text-muted);
-  padding: var(--space-2) var(--space-1);
-}
-
-.reservation-dialog__actions {
+.modal__actions {
   display: flex;
   justify-content: space-between;
   gap: var(--space-3);

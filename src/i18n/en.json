@@ -1,0 +1,49 @@
+{
+  "app.heading": "Parking facilities",
+  "app.subtitle": "Reserve a spot before you arrive",
+
+  "list.errorTitle": "Can't reach live parking data right now.",
+  "list.errorSubtitle": "We'll keep trying automatically every 25 seconds.",
+  "list.empty": "No facilities to show right now.",
+  "list.staleBanner": "Live feed unavailable — showing data as of {time}.",
+
+  "card.updated": "Updated {age}",
+  "card.freeOf": "/ {total} free",
+  "card.viewDetailsAria": "View details for {name}",
+
+  "time.secondsAgo": "{count}s ago",
+  "time.minutesAgo": "{count}m ago",
+
+  "modal.confirm": "Confirm",
+  "modal.close": "Close",
+
+  "reserveAction.button": "Reserve",
+  "reserveAction.reservedFor": "Reserved for {name}",
+  "reserveAction.cancelAriaLabel": "Cancel reservation for {name}",
+  "reserveAction.reason.feedStale": "Reserving is currently unavailable. Try again in a couple of minutes.",
+  "reserveAction.reason.closed": "Facility is closed.",
+  "reserveAction.reason.full": "No free spaces right now.",
+
+  "reserveModal.title": "Reserve a spot at {name}?",
+  "reserveModal.description": "{free} spaces free of {total} right now. We'll hold 1 spot for you.",
+  "reserveModal.nameLabel": "Your name",
+  "reserveModal.namePlaceholder": "e.g. Ward",
+  "reserveModal.hint": "We'll remember this on this device for next time.",
+
+  "cancelModal.title": "Cancel reservation",
+  "cancelModal.description": "Cancel your reservation at {name}? You'll lose your held spot.",
+  "cancelModal.confirm": "Cancel reservation",
+
+  "detailModal.asOf": "as of {time}",
+  "detailModal.address": "Address",
+  "detailModal.phone": "Phone",
+  "detailModal.openingHours": "Opening hours",
+  "detailModal.operator": "Operator",
+  "detailModal.category": "Zone",
+  "detailModal.freeParking": "Free parking",
+  "detailModal.freeParking.yes": "Yes",
+  "detailModal.freeParking.no": "No",
+  "detailModal.location": "Location",
+  "detailModal.openInMaps": "Open in Google Maps",
+  "detailModal.infoLink": "Official page"
+}

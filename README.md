@@ -1,78 +1,36 @@
-# React + TypeScript + Vite
+# Gent Parkings
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A small frontend practice project: live parking availability for the city of Ghent, with the
+ability to reserve (and cancel) a spot ahead of arrival.
 
-Currently, two official plugins are available:
+It pulls real-time occupancy from Stad Gent's open data feed
+([`bezetting-parkeergarages-real-time`](https://data.stad.gent/explore/dataset/bezetting-parkeergarages-real-time))
+and layers reservations on top, stored locally in the browser — the public feed is read-only,
+so anything you "reserve" here only exists on your own device.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Features
 
-## React Compiler
+- Live list of every facility, polled every 25s, with a clear visual status (open / filling up
+  / full / closed) that never relies on color alone — every state pairs a color with an icon
+  and a text label.
+- Honest staleness handling: if the feed can't be reached, the last known numbers are shown
+  with a clear "showing data as of…" banner rather than a blank or frozen screen. A single
+  facility whose own timestamp lags is flagged individually without blocking the rest of the
+  app.
+- Reserve a spot with your name, see it reflected immediately (optimistic update), and cancel
+  it again from the same tag. Reservations survive a page refresh.
+- English and Dutch, detected from the browser's language.
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+## Stack
 
-Note: This will impact Vite dev & build performances.
-You can also try [the experimental native React Compiler support in plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md#rust-react-compiler) by using `compiler: true` in the plugin options instead of using the Babel plugin.
+Vite + React 19 + TypeScript, with the React Compiler doing memoization so the code doesn't
+have to. Plain CSS with a small set of design tokens (`src/styles/tokens.css`) — no CSS
+framework, no CSS-in-JS. Axios for the one HTTP call. No backend beyond localStorage: this is
+a frontend exercise.
 
-## Expanding the ESLint configuration
+## Running it
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
-```
-
-You can also install [eslint-plugin-react-x](https://npmx.dev/package/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://npmx.dev/package/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
+```bash
+npm install
+npm run dev
 ```

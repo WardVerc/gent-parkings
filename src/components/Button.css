@@ -31,3 +31,12 @@
   background: var(--color-status-closed-bg);
   color: var(--color-text);
 }
+
+.btn--danger {
+  background: var(--color-danger);
+  color: var(--color-accent-contrast);
+}
+
+.btn--danger:hover:not(:disabled) {
+  background: var(--color-danger-hover);
+}

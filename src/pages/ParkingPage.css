@@ -2,9 +2,15 @@
   height: 64px;
   display: flex;
   align-items: center;
+  gap: var(--space-3);
   padding: 0 var(--space-6);
   background: var(--color-surface);
   border-bottom: 1px solid var(--color-border);
+}
+
+.parking-page__logo {
+  height: 32px;
+  width: auto;
 }
 
 .parking-page__brand {
