@@ -76,7 +76,7 @@ export function FacilityDetailModal({
         />
         <div className="facility-detail__meta">
           {t("detailModal.asOf", {
-            time: formatTimestamp(facility.lastUpdate),
+            time: formatTimestamp(facility.lastUpdate, t),
           })}
         </div>
       </div>
