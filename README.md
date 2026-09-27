@@ -8,6 +8,12 @@ It pulls real-time occupancy from Stad Gent's open data feed
 and layers reservations on top, stored locally in the browser — the public feed is read-only,
 so anything you "reserve" here only exists on your own device.
 
+## Screenshots
+
+| Overview | Facility details |
+| --- | --- |
+| ![Overview of parking facilities](public/screenshots/overview.png) | ![Facility details modal](public/screenshots/details.png) |
+
 ## Features
 
 - Live list of every facility, polled every 25s, with a clear visual status (open / filling up
