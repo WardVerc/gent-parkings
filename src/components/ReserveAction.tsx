@@ -7,6 +7,7 @@ import { useTranslation } from "../i18n/useTranslation";
 interface ReserveActionProps {
   facility: FacilityView;
   heldForName: string | null;
+  isPending: boolean;
   onReserve: () => void;
   onCancelReservation: () => void;
 }
@@ -14,16 +15,20 @@ interface ReserveActionProps {
 export function ReserveAction({
   facility,
   heldForName,
+  isPending,
   onReserve,
   onCancelReservation,
 }: ReserveActionProps) {
   const t = useTranslation();
+  const pendingClassName = isPending ? "reserve-action--pending" : "";
 
   if (heldForName) {
     return (
       <Tag
+        className={pendingClassName}
         onClick={(event) => {
           event.stopPropagation();
+          if (isPending) return;
           onCancelReservation();
         }}
       >
@@ -41,7 +46,7 @@ export function ReserveAction({
   const reason = getDisabledReason(facility);
   if (reason) {
     return (
-      <div className="reserve-action">
+      <div className={`reserve-action ${pendingClassName}`}>
         <Button variant="primary" disabled>
           {t("reserveAction.button")}
         </Button>
@@ -53,8 +58,11 @@ export function ReserveAction({
   return (
     <Button
       variant="primary"
+      className={pendingClassName}
+      aria-busy={isPending}
       onClick={(event) => {
         event.stopPropagation();
+        if (isPending) return;
         onReserve();
       }}
     >

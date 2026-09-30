@@ -16,3 +16,7 @@
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
+
+.reserve-action--pending {
+  opacity: 0.5;
+}

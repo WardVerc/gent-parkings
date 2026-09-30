@@ -28,7 +28,11 @@
   "reserveModal.description": "Nu {free} van {total} plaatsen vrij. We houden 1 plek voor je vrij.",
   "reserveModal.nameLabel": "Je naam",
   "reserveModal.namePlaceholder": "bv. Ward",
-  "reserveModal.hint": "We onthouden dit op dit toestel voor de volgende keer.",
+  "reserveModal.hint": "We houden deze plek vrij tot je annuleert.",
+
+  "reservations.error.load": "Kan de reserveringsserver niet bereiken. Je reserveringen zijn mogelijk niet actueel.",
+  "reservations.error.reserve": "Je reservering kon niet worden opgeslagen. Probeer het opnieuw.",
+  "reservations.error.cancel": "Je reservering kon niet worden geannuleerd. Ze is nog steeds actief.",
 
   "cancelModal.title": "Reservering annuleren",
   "cancelModal.description": "Reservering bij {name} annuleren? Je verliest je vastgehouden plek.",

@@ -28,7 +28,11 @@
   "reserveModal.description": "{free} spaces free of {total} right now. We'll hold 1 spot for you.",
   "reserveModal.nameLabel": "Your name",
   "reserveModal.namePlaceholder": "e.g. Ward",
-  "reserveModal.hint": "We'll remember this on this device for next time.",
+  "reserveModal.hint": "We'll hold this spot until you cancel it.",
+
+  "reservations.error.load": "Can't reach the reservation server. Your reservations may be out of date.",
+  "reservations.error.reserve": "Your reservation couldn't be saved. Please try again.",
+  "reservations.error.cancel": "Your reservation couldn't be cancelled. It's still active.",
 
   "cancelModal.title": "Cancel reservation",
   "cancelModal.description": "Cancel your reservation at {name}? You'll lose your held spot.",

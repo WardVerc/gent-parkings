@@ -1,13 +1,14 @@
 import "./FacilityList.css";
 import { FacilityCard } from "./FacilityCard";
 import type { FacilityView } from "../data/facility";
+import type { FacilityReservationState } from "../hooks/useReservations";
 import { useTranslation } from "../i18n/useTranslation";
 
 interface FacilityListProps {
   facilities: FacilityView[] | null;
   loading: boolean;
   error: string | null;
-  reservedNameByFacility: Record<string, string>;
+  reservationByFacility: Record<string, FacilityReservationState>;
   onReserve: (facility: FacilityView) => void;
   onCancelReservation: (facility: FacilityView) => void;
   onViewDetails: (facility: FacilityView) => void;
@@ -17,7 +18,7 @@ export function FacilityList({
   facilities,
   loading,
   error,
-  reservedNameByFacility,
+  reservationByFacility,
   onReserve,
   onCancelReservation,
   onViewDetails,
@@ -58,7 +59,10 @@ export function FacilityList({
           <FacilityCard
             key={facility.id}
             facility={facility}
-            heldForName={reservedNameByFacility[facility.id] ?? null}
+            heldForName={
+              reservationByFacility[facility.id]?.heldForName ?? null
+            }
+            isPending={reservationByFacility[facility.id]?.isPending ?? false}
             onReserve={onReserve}
             onCancelReservation={onCancelReservation}
             onViewDetails={onViewDetails}

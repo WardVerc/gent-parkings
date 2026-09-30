@@ -5,11 +5,16 @@ import type { MouseEventHandler, ReactNode } from "react";
 interface TagProps {
   children: ReactNode;
   onClick: MouseEventHandler<HTMLButtonElement>;
+  className?: string;
 }
 
-export function Tag({ children, onClick }: TagProps) {
+export function Tag({ children, onClick, className = "" }: TagProps) {
   return (
-    <button type="button" className="tag tag--reserved" onClick={onClick}>
+    <button
+      type="button"
+      className={`tag tag--reserved ${className}`}
+      onClick={onClick}
+    >
       <StatusIcon variant="open" size={15} />
       {children}
       <svg

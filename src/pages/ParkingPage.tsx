@@ -30,10 +30,12 @@ export function ParkingPage() {
   const t = useTranslation();
   const { data, loading, error } = useParkingFacilities();
   const {
-    reservedNameByFacility,
+    reservationByFacility,
     countAtFacility,
     addReservation,
     cancelReservation,
+    errorKey,
+    dismissError,
   } = useReservations();
 
   const [reservingFacilityId, setReservingFacilityId] = useState<string | null>(
@@ -70,8 +72,11 @@ export function ParkingPage() {
   };
 
   const handleCancelReservation = () => {
-    if (!cancelingFacility) return;
-    cancelReservation(cancelingFacility.id);
+    const reservation = cancelingFacility
+      ? reservationByFacility[cancelingFacility.id]
+      : undefined;
+    if (!reservation) return;
+    cancelReservation(reservation.reservationId);
     setCancelingFacilityId(null);
   };
 
@@ -86,6 +91,19 @@ export function ParkingPage() {
         <h1>{t("app.heading")}</h1>
         <p className="parking-page__sub">{t("app.subtitle")}</p>
 
+        {errorKey && (
+          <div className="parking-page__error" role="alert">
+            <span>{t(errorKey)}</span>
+            <button
+              type="button"
+              className="parking-page__error-dismiss"
+              onClick={dismissError}
+            >
+              {t("modal.close")}
+            </button>
+          </div>
+        )}
+
         {sortedFacilities && sortedFacilities.length > 0 && (
           <SortControls
             options={FACILITY_SORT_OPTIONS}
@@ -99,7 +117,7 @@ export function ParkingPage() {
           facilities={sortedFacilities}
           loading={loading}
           error={error}
-          reservedNameByFacility={reservedNameByFacility}
+          reservationByFacility={reservationByFacility}
           onReserve={(facility) => setReservingFacilityId(facility.id)}
           onCancelReservation={(facility) =>
             setCancelingFacilityId(facility.id)

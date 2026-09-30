@@ -34,3 +34,25 @@
   color: var(--color-text-secondary);
   margin-bottom: var(--space-4);
 }
+
+.parking-page__error {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  margin-bottom: var(--space-4);
+  border-radius: var(--radius-sm);
+  background: var(--color-status-full-bg);
+  color: var(--color-status-full);
+  font-size: var(--font-size-sm);
+}
+
+.parking-page__error-dismiss {
+  border: none;
+  background: none;
+  color: inherit;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
