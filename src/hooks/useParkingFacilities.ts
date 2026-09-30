@@ -96,6 +96,7 @@ export function useParkingFacilities(): UseParkingFacilitiesResult {
         setError(null);
         setLoading(false);
       } catch (err) {
+        setData(null);
         setError(
           err instanceof Error
             ? err.message
