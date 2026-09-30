@@ -5,7 +5,7 @@ export type TranslationKey = keyof typeof en;
 
 const dictionaries = { en, nl };
 
-export type Locale = keyof typeof dictionaries;
+type Locale = keyof typeof dictionaries;
 
 export function detectLocale(): Locale {
   return navigator.language.toLowerCase().startsWith("nl") ? "nl" : "en";

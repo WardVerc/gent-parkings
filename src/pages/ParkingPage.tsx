@@ -36,6 +36,7 @@ export function ParkingPage() {
     addReservation,
     cancelReservation,
   } = useReservations();
+
   const [reservingFacilityId, setReservingFacilityId] = useState<string | null>(
     null,
   );
@@ -45,13 +46,13 @@ export function ParkingPage() {
   const [viewingFacilityId, setViewingFacilityId] = useState<string | null>(
     null,
   );
-  const { sortId, direction, setSort, apply } = useSort(FACILITY_SORT_OPTIONS);
+  const { sortId, direction, setSort, sort } = useSort(FACILITY_SORT_OPTIONS);
 
   const facilities =
     data?.map((facility) =>
       toFacilityView(facility, countAtFacility(facility.id)),
     ) ?? null;
-  const sortedFacilities = facilities ? apply(facilities) : null;
+  const sortedFacilities = facilities ? sort(facilities) : null;
 
   const reservingFacility =
     sortedFacilities?.find((facility) => facility.id === reservingFacilityId) ??

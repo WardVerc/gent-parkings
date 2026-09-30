@@ -28,7 +28,6 @@ export function ReserveAction({
           event.stopPropagation();
           onCancelReservation();
         }}
-        showCloseIcon
       >
         {t("reserveAction.reservedFor", { name: heldForName })}
       </Tag>

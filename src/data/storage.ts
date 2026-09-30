@@ -4,7 +4,7 @@ import type { Reservation } from './reservation'
 const LAST_SUCCESS_KEY = 'parking:lastSuccess'
 const RESERVATIONS_KEY = 'parking:reservations'
 
-export interface CachedFacilities {
+interface CachedFacilities {
   facilities: Facility[]
   fetchedAt: string
 }

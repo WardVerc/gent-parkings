@@ -12,7 +12,6 @@
 
   "card.updated": "Updated {age}",
   "card.freeOf": "/ {total} free",
-  "card.viewDetailsAria": "View details for {name}",
 
   "time.secondsAgo": "{count}s ago",
   "time.minutesAgo": "{count}m ago",
@@ -23,7 +22,6 @@
 
   "reserveAction.button": "Reserve",
   "reserveAction.reservedFor": "Reserved for {name}",
-  "reserveAction.cancelAriaLabel": "Cancel reservation for {name}",
   "reserveAction.reason.feedStale": "Reserving is currently unavailable. Try again in a couple of minutes.",
   "reserveAction.reason.closed": "Facility is closed.",
   "reserveAction.reason.full": "No free spaces right now.",

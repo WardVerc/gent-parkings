@@ -12,7 +12,6 @@
 
   "card.updated": "Bijgewerkt {age}",
   "card.freeOf": "/ {total} vrij",
-  "card.viewDetailsAria": "Details bekijken voor {name}",
 
   "time.secondsAgo": "{count}s geleden",
   "time.minutesAgo": "{count}m geleden",
@@ -23,7 +22,6 @@
 
   "reserveAction.button": "Reserveren",
   "reserveAction.reservedFor": "Gereserveerd voor {name}",
-  "reserveAction.cancelAriaLabel": "Reservering voor {name} annuleren",
   "reserveAction.reason.feedStale": "Reserveren is momenteel niet beschikbaar. Probeer het over enkele minuten opnieuw.",
   "reserveAction.reason.closed": "Parkeergarage is gesloten.",
   "reserveAction.reason.full": "Op dit moment geen vrije plaatsen.",

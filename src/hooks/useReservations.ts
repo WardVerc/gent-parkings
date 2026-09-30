@@ -2,8 +2,7 @@ import { useState } from "react";
 import type { Reservation } from "../data/reservation";
 import { readReservations, writeReservations } from "../data/storage";
 
-export interface UseReservationsResult {
-  reservations: Reservation[];
+interface UseReservationsResult {
   lastDriverName: string | null;
   reservedNameByFacility: Record<string, string>;
   countAtFacility: (facilityId: string) => number;
@@ -22,12 +21,7 @@ export function useReservations(): UseReservationsResult {
   }
 
   function addReservation(facilityId: string, driverName: string): void {
-    const reservation: Reservation = {
-      id: crypto.randomUUID(),
-      facilityId,
-      driverName,
-      createdAt: new Date().toISOString(),
-    };
+    const reservation: Reservation = { facilityId, driverName };
     const next = [...reservations, reservation];
     setReservations(next);
     writeReservations(next);
@@ -52,7 +46,6 @@ export function useReservations(): UseReservationsResult {
   }
 
   return {
-    reservations,
     lastDriverName,
     reservedNameByFacility,
     countAtFacility,

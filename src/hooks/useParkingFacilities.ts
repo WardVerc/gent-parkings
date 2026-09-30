@@ -11,7 +11,7 @@ const POLL_INTERVAL_MS = 25_000;
 
 export const STALE_THRESHOLD_MS = 3 * 60_000;
 
-export interface UseParkingFacilitiesResult {
+interface UseParkingFacilitiesResult {
   data: Facility[] | null;
   loading: boolean;
   error: string | null;
@@ -25,15 +25,12 @@ interface FeedRecord {
   description: string | null;
   totalcapacity: number;
   availablecapacity: number;
-  occupation: number | null;
-  type: string | null;
   openingtimesdescription: string | null;
   isopennow: number;
   temporaryclosed: number;
   operatorinformation: string | null;
   freeparking: number;
   urllinkaddress: string | null;
-  occupancytrend: string | null;
   locationanddimension: string | null;
   location: FacilityLocation | null;
   text: string | null;
@@ -65,15 +62,12 @@ function toFacility(record: FeedRecord): Facility {
     description: record.description ?? null,
     totalCapacity: record.totalcapacity,
     availableCapacity: record.availablecapacity,
-    occupancyPercent: record.occupation ?? null,
     isOpenNow: record.isopennow === 1 && record.temporaryclosed !== 1,
     lastUpdate: record.lastupdate,
-    facilityType: record.type ?? null,
     openingTimesDescription: record.openingtimesdescription ?? null,
     operatorInformation: record.operatorinformation ?? null,
     isFreeParking: record.freeparking === 1,
     infoUrl: record.urllinkaddress ?? null,
-    occupancyTrend: record.occupancytrend ?? null,
     category: record.categorie ?? null,
     address: details?.roadName ?? null,
     phone: details?.contactDetailsTelephoneNumber ?? null,

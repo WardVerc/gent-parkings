@@ -10,11 +10,11 @@ export interface SortOption<T> {
   compare: (a: T, b: T) => number;
 }
 
-export interface UseSortResult<T> {
+interface UseSortResult<T> {
   sortId: string;
   direction: SortDirection;
   setSort: (sortId: string) => void;
-  apply: (items: T[]) => T[];
+  sort: (items: T[]) => T[];
 }
 
 export function useSort<T>(options: SortOption<T>[]): UseSortResult<T> {
@@ -31,12 +31,12 @@ export function useSort<T>(options: SortOption<T>[]): UseSortResult<T> {
     setDirection(option?.defaultDirection ?? "asc");
   }
 
-  function apply(items: T[]): T[] {
+  function sort(items: T[]): T[] {
     const option = options.find((candidate) => candidate.id === sortId);
     if (!option) return items;
     const sorted = [...items].sort(option.compare);
     return direction === "asc" ? sorted : sorted.reverse();
   }
 
-  return { sortId, direction, setSort, apply };
+  return { sortId, direction, setSort, sort };
 }

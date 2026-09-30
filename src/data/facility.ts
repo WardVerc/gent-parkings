@@ -13,15 +13,12 @@ export interface Facility {
   description: string | null;
   totalCapacity: number;
   availableCapacity: number;
-  occupancyPercent: number | null;
   isOpenNow: boolean;
   lastUpdate: string;
-  facilityType: string | null;
   openingTimesDescription: string | null;
   operatorInformation: string | null;
   isFreeParking: boolean;
   infoUrl: string | null;
-  occupancyTrend: string | null;
   category: string | null;
   address: string | null;
   phone: string | null;
@@ -32,10 +29,7 @@ export interface Facility {
 export type FacilityStatus = "open" | "filling-up" | "full" | "closed";
 
 export interface FacilityView extends Facility {
-  myReservationCount: number;
   effectiveFreeSpaces: number;
-  // The feed shows fewer free spaces than our own reservations would predict — someone else likely took a spot.
-  hasFewerThanExpected: boolean;
   isDataStale: boolean;
   status: FacilityStatus;
 }
@@ -44,14 +38,14 @@ export function toFacilityView(
   facility: Facility,
   myReservationCount: number,
 ): FacilityView {
-  const rawFreeSpaces = facility.availableCapacity - myReservationCount;
-  const effectiveFreeSpaces = Math.max(rawFreeSpaces, 0);
+  const effectiveFreeSpaces = Math.max(
+    facility.availableCapacity - myReservationCount,
+    0,
+  );
 
   return {
     ...facility,
-    myReservationCount,
     effectiveFreeSpaces,
-    hasFewerThanExpected: rawFreeSpaces < 0,
     isDataStale: isStale(facility.lastUpdate, STALE_THRESHOLD_MS),
     status: deriveStatus(facility, effectiveFreeSpaces),
   };
