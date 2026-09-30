@@ -7,7 +7,6 @@ import { useTranslation } from "../i18n/useTranslation";
 interface ReserveActionProps {
   facility: FacilityView;
   heldForName: string | null;
-  isFeedStale: boolean;
   onReserve: () => void;
   onCancelReservation: () => void;
 }
@@ -15,7 +14,6 @@ interface ReserveActionProps {
 export function ReserveAction({
   facility,
   heldForName,
-  isFeedStale,
   onReserve,
   onCancelReservation,
 }: ReserveActionProps) {
@@ -34,17 +32,13 @@ export function ReserveAction({
     );
   }
 
-  const getDisabledReason = (
-    facility: FacilityView,
-    isFeedStale: boolean,
-  ): string | null => {
-    if (isFeedStale) return t("reserveAction.reason.feedStale");
+  const getDisabledReason = (facility: FacilityView): string | null => {
     if (facility.status === "closed") return t("reserveAction.reason.closed");
     if (facility.status === "full") return t("reserveAction.reason.full");
     return null;
   };
 
-  const reason = getDisabledReason(facility, isFeedStale);
+  const reason = getDisabledReason(facility);
   if (reason) {
     return (
       <div className="reserve-action">

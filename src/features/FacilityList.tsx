@@ -1,6 +1,5 @@
 import "./FacilityList.css";
 import { FacilityCard } from "./FacilityCard";
-import { formatTimestamp } from "../data/staleness";
 import type { FacilityView } from "../data/facility";
 import { useTranslation } from "../i18n/useTranslation";
 
@@ -8,8 +7,6 @@ interface FacilityListProps {
   facilities: FacilityView[] | null;
   loading: boolean;
   error: string | null;
-  isStale: boolean;
-  asOf: string | null;
   reservedNameByFacility: Record<string, string>;
   onReserve: (facility: FacilityView) => void;
   onCancelReservation: (facility: FacilityView) => void;
@@ -20,8 +17,6 @@ export function FacilityList({
   facilities,
   loading,
   error,
-  isStale,
-  asOf,
   reservedNameByFacility,
   onReserve,
   onCancelReservation,
@@ -58,18 +53,12 @@ export function FacilityList({
 
   return (
     <div>
-      {isStale && asOf && (
-        <div className="facility-list__banner">
-          {t("list.staleBanner", { time: formatTimestamp(asOf, t) })}
-        </div>
-      )}
       {facilities &&
         facilities.map((facility) => (
           <FacilityCard
             key={facility.id}
             facility={facility}
             heldForName={reservedNameByFacility[facility.id] ?? null}
-            isFeedStale={isStale}
             onReserve={onReserve}
             onCancelReservation={onCancelReservation}
             onViewDetails={onViewDetails}

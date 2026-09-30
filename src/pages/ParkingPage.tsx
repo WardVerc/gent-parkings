@@ -28,10 +28,9 @@ const FACILITY_SORT_OPTIONS: SortOption<FacilityView>[] = [
 
 export function ParkingPage() {
   const t = useTranslation();
-  const { data, loading, error, isStale, asOf } = useParkingFacilities();
+  const { data, loading, error } = useParkingFacilities();
   const {
     reservedNameByFacility,
-    lastDriverName,
     countAtFacility,
     addReservation,
     cancelReservation,
@@ -100,8 +99,6 @@ export function ParkingPage() {
           facilities={sortedFacilities}
           loading={loading}
           error={error}
-          isStale={isStale}
-          asOf={asOf}
           reservedNameByFacility={reservedNameByFacility}
           onReserve={(facility) => setReservingFacilityId(facility.id)}
           onCancelReservation={(facility) =>
@@ -114,7 +111,6 @@ export function ParkingPage() {
       {reservingFacility && (
         <ReservationModal
           facility={reservingFacility}
-          defaultDriverName={lastDriverName}
           onConfirm={handleConfirm}
           onCancel={() => setReservingFacilityId(null)}
         />

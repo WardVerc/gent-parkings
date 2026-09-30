@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import type { Facility, FacilityLocation } from "../data/facility";
-import { readCachedFacilities, writeCachedFacilities } from "../data/storage";
 
 const FEED_URL =
   "https://data.stad.gent/api/explore/v2.1/catalog/datasets/bezetting-parkeergarages-real-time/records";
@@ -15,8 +14,6 @@ interface UseParkingFacilitiesResult {
   data: Facility[] | null;
   loading: boolean;
   error: string | null;
-  isStale: boolean;
-  asOf: string | null;
 }
 
 interface FeedRecord {
@@ -80,8 +77,6 @@ export function useParkingFacilities(): UseParkingFacilitiesResult {
   const [data, setData] = useState<Facility[] | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [isStale, setIsStale] = useState(false);
-  const [asOf, setAsOf] = useState<string | null>(null);
 
   useEffect(() => {
     async function fetchFacilities() {
@@ -99,17 +94,8 @@ export function useParkingFacilities(): UseParkingFacilitiesResult {
 
         setData(facilities);
         setError(null);
-        setIsStale(false);
-        setAsOf(new Date().toISOString());
-        writeCachedFacilities(facilities);
         setLoading(false);
       } catch (err) {
-        const cached = readCachedFacilities();
-        if (cached) {
-          setData(cached.facilities);
-          setIsStale(true);
-          setAsOf(cached.fetchedAt);
-        }
         setError(
           err instanceof Error
             ? err.message
@@ -126,5 +112,5 @@ export function useParkingFacilities(): UseParkingFacilitiesResult {
     };
   }, []);
 
-  return { data, loading, error, isStale, asOf };
+  return { data, loading, error };
 }

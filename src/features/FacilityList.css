@@ -16,12 +16,3 @@
   margin-top: var(--space-2);
 }
 
-.facility-list__banner {
-  background: var(--color-status-stale-bg);
-  color: var(--color-status-stale);
-  font-size: var(--font-size-sm);
-  font-weight: 600;
-  padding: var(--space-3) var(--space-4);
-  border-radius: var(--radius-sm);
-  margin-bottom: var(--space-4);
-}

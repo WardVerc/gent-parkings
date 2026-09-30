@@ -11,7 +11,6 @@ import { useTranslation } from "../i18n/useTranslation";
 interface FacilityCardProps {
   facility: FacilityView;
   heldForName: string | null;
-  isFeedStale: boolean;
   onReserve: (facility: FacilityView) => void;
   onCancelReservation: (facility: FacilityView) => void;
   onViewDetails: (facility: FacilityView) => void;
@@ -20,7 +19,6 @@ interface FacilityCardProps {
 export function FacilityCard({
   facility,
   heldForName,
-  isFeedStale,
   onReserve,
   onCancelReservation,
   onViewDetails,
@@ -71,7 +69,6 @@ export function FacilityCard({
         <ReserveAction
           facility={facility}
           heldForName={heldForName}
-          isFeedStale={isFeedStale}
           onReserve={() => onReserve(facility)}
           onCancelReservation={() => onCancelReservation(facility)}
         />

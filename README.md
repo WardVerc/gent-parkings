@@ -19,10 +19,6 @@ so anything you "reserve" here only exists on your own device.
 - Live list of every facility, polled every 25s, with a clear visual status (open / filling up
   / full / closed) that never relies on color alone — every state pairs a color with an icon
   and a text label.
-- Honest staleness handling: if the feed can't be reached, the last known numbers are shown
-  with a clear "showing data as of…" banner rather than a blank or frozen screen. A single
-  facility whose own timestamp lags is flagged individually without blocking the rest of the
-  app.
 - Sort the list by name (A–Z by default) or by free spots (most first by default). Clicking
   the active option again flips the direction, and the free-spots count already takes your
   own reservations into account.

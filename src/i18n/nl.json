@@ -8,7 +8,6 @@
   "list.errorTitle": "Kan momenteel geen live parkeergegevens ophalen.",
   "list.errorSubtitle": "We proberen het automatisch elke 25 seconden opnieuw.",
   "list.empty": "Er zijn nu geen parkeergarages om te tonen.",
-  "list.staleBanner": "Live feed niet beschikbaar — gegevens van {time} worden getoond.",
 
   "card.updated": "Bijgewerkt {age}",
   "card.freeOf": "/ {total} vrij",
@@ -22,7 +21,6 @@
 
   "reserveAction.button": "Reserveren",
   "reserveAction.reservedFor": "Gereserveerd voor {name}",
-  "reserveAction.reason.feedStale": "Reserveren is momenteel niet beschikbaar. Probeer het over enkele minuten opnieuw.",
   "reserveAction.reason.closed": "Parkeergarage is gesloten.",
   "reserveAction.reason.full": "Op dit moment geen vrije plaatsen.",
 

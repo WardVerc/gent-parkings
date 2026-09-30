@@ -8,7 +8,6 @@
   "list.errorTitle": "Can't reach live parking data right now.",
   "list.errorSubtitle": "We'll keep trying automatically every 25 seconds.",
   "list.empty": "No facilities to show right now.",
-  "list.staleBanner": "Live feed unavailable — showing data as of {time}.",
 
   "card.updated": "Updated {age}",
   "card.freeOf": "/ {total} free",
@@ -22,7 +21,6 @@
 
   "reserveAction.button": "Reserve",
   "reserveAction.reservedFor": "Reserved for {name}",
-  "reserveAction.reason.feedStale": "Reserving is currently unavailable. Try again in a couple of minutes.",
   "reserveAction.reason.closed": "Facility is closed.",
   "reserveAction.reason.full": "No free spaces right now.",
 

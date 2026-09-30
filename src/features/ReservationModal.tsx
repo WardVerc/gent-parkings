@@ -7,19 +7,17 @@ import { useTranslation } from "../i18n/useTranslation";
 
 interface ReservationModalProps {
   facility: FacilityView;
-  defaultDriverName: string | null;
   onConfirm: (driverName: string) => void;
   onCancel: () => void;
 }
 
 export function ReservationModal({
   facility,
-  defaultDriverName,
   onConfirm,
   onCancel,
 }: ReservationModalProps) {
   const t = useTranslation();
-  const [driverName, setDriverName] = useState(defaultDriverName ?? "");
+  const [driverName, setDriverName] = useState("");
   const trimmedName = driverName.trim();
 
   return (
